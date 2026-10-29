@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>JØM Studios — Photo & Film</title>
-<meta name="description" content="JØM — Photo, film et production créative à Ottawa–Gatineau. Tournage, montage, étalonnage et motion design en 4K.">
+<meta name="description" content="JØM — Photo, film et production créative à Ottawa–Gatineau. Tournage, montage, étalonnage et motion design en 4K. Photo, film and creative production in Ottawa–Gatineau.">
 <meta property="og:title" content="JØM Studios — Photo & Film">
 <meta property="og:image" content="https://jomvisuel.github.io/jomvisuel/media/showreel_poster.jpg">
 <link rel="icon" href="jomvisuel/media/favicon.png">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <script>
-fetch('jomvisuel/index.html').then(function(r){return r.text()}).then(function(h){
+fetch('jomvisuel/index.html',{cache:'no-cache'}).then(function(r){return r.text()}).then(function(h){
   h=h.split('"media/').join('"jomvisuel/media/');
   document.open();document.write(h);document.close();
 });
