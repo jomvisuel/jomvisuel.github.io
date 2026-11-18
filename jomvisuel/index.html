@@ -64,6 +64,44 @@ section{padding-block:clamp(64px,9vw,120px)}
 .lang button{font:700 12px/1 var(--body);letter-spacing:.08em;padding:7px 10px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 @media (max-width:420px){.nav .btn{padding:9px 12px;font-size:13px}.navr{gap:8px}}
+/* 3D */
+.h3d{position:relative}
+.h3d-c{position:absolute;inset:0;z-index:-1;display:none}
+.h3d-c canvas,.g3d-c canvas{width:100%;height:100%;display:block}
+.h3d-cap2,.h3d-hint,.h3d-fade{display:none}
+html.is3d .h3d{height:260vh}
+html.is3d .h3d-stick{position:sticky;top:0;height:100vh;min-height:0;background:radial-gradient(120% 90% at 70% 40%,color-mix(in srgb,var(--accent) 12%,var(--surface)) 0%,var(--bg) 62%)}
+html.is3d .h3d-stick .media{display:none}
+html.is3d .h3d-c{display:block}
+html.is3d .h3d-stick::after{background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 70%,transparent) 0%,transparent 55%);pointer-events:none}
+html.is3d .h3d-stick .content{opacity:var(--p1,1);transform:translateY(calc((1 - var(--p1,1)) * -40px));pointer-events:auto}
+html.is3d .h3d-cap2{display:block;position:absolute;left:0;right:0;bottom:clamp(64px,10vh,110px);text-align:center;opacity:var(--p2,0);pointer-events:none;color:#fff}
+.h3d-cap2 b{display:block;font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(34px,5vw,64px);line-height:1}
+.h3d-cap2 span{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+html.is3d .h3d-hint{display:flex;position:absolute;left:50%;bottom:22px;transform:translateX(-50%);flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);opacity:var(--p1,1);pointer-events:none}
+.h3d-hint i{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:hint 1.6s ease-in-out infinite}
+@keyframes hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+html.is3d .h3d-fade{display:block;position:absolute;inset:0;background:var(--bg);opacity:var(--p3,0);pointer-events:none;z-index:3}
+@media (max-width:820px){html.is3d .h3d-stick::after{background:linear-gradient(180deg,transparent 35%,color-mix(in srgb,var(--bg) 88%,transparent) 78%)}}
+.g3d{display:none;padding:0}
+html.is3d .g3d{display:block}
+.g3d-stick{position:sticky;top:0;height:100vh;overflow:hidden;border-block:1px solid var(--line)}
+.g3d-c{position:absolute;inset:0}
+.g3d-ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding-block:clamp(88px,12vh,120px) clamp(28px,5vh,48px)}
+.g3d-ui .eyebrow{color:var(--accent)}
+.g3d-ui h2{margin-top:12px}
+.g3d-ui .hintp{color:var(--muted);max-width:40ch;margin:12px 0 0;font-size:15px}
+.g3d-foot{display:flex;justify-content:space-between;align-items:end;gap:16px}
+.g3d-cap b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(24px,3vw,40px);line-height:1.05}
+.g3d-cap span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.g3d-cap.in{animation:capin .5s ease both}
+@keyframes capin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.g3d-n{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--fg);white-space:nowrap}
+.g3d-bar{height:2px;background:var(--line);margin-top:16px;overflow:hidden}
+.g3d-bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+@media (prefers-reduced-motion: reduce){.h3d-hint i{animation:none}.g3d-cap.in{animation:none}}
+
+
 
 
 
@@ -170,7 +208,7 @@ dialog.lb p{margin:12px 2px 0;font-weight:600}
 
 </style>
 <div id="app"></div>
-<script id="site-state" type="application/json">{"name": "JØM Studios", "tagline": "Stories. Sound. Vision. Impact.", "heroTitle": "Racontons votre *histoire.*", "heroSub": "Studio de création vidéo et photo. Tournage, montage, étalonnage et motion design livrés en 4K, pour les marques, les événements et les créateurs.", "accent": "#D4AF62", "mode": "dark", "font": "cinema", "heroVideo": "media/showreel_hero.mp4", "heroPoster": "media/showreel_poster.jpg", "aboutImg": "media/logo_jom_noir.jpg", "about": "JØM Studios est un studio de création visuelle. On transforme vos idées en images qui restent : publicités, vidéos d'événements, contenus pour les réseaux et identités animées.\n\nChaque projet est tourné, monté et étalonné avec le même soin, du premier plan jusqu'au rendu final en 4K.", "marquee": ["Vidéo 4K", "Photo", "Montage", "Étalonnage", "Motion design", "Sound design"], "services": [{"icon": "cam", "t": "Tournage vidéo", "d": "Captation en 4K pour pubs, événements, portraits et contenus de marque."}, {"icon": "photo", "t": "Photographie", "d": "Portraits, produits et reportages, retouchés et livrés prêts à publier."}, {"icon": "cut", "t": "Montage", "d": "Rythme, narration et sous-titres pour chaque format : Reels, YouTube, TV."}, {"icon": "grade", "t": "Étalonnage", "d": "Un look cohérent et cinématographique sur toutes vos images."}, {"icon": "spark", "t": "Motion design", "d": "Logos animés, titres, intros et pubs animées sur mesure."}, {"icon": "wave", "t": "Sound design", "d": "Musique, bruitages et voix off mixés pour un son qui porte."}], "process": [{"t": "Brief", "d": "On échange sur votre projet, votre public et vos objectifs."}, {"t": "Tournage", "d": "On capte les images et le son, en studio ou sur place."}, {"t": "Montage", "d": "Montage, étalonnage, motion design et mixage audio."}, {"t": "Livraison", "d": "Fichiers finaux en 4K, déclinés pour chaque plateforme."}], "portfolio": [{"type": "video", "src": "media/promo_doree_16x9.mp4", "poster": "media/promo_doree_16x9.jpg", "title": "JØM — Promo lumière dorée", "cat": "Motion design", "meta": "16:9 · 00:25", "layout": "wide", "title_en": "JØM — Golden light promo"}, {"type": "image", "src": "media/dsc3893.jpg", "poster": "", "title": "Élégance en fuchsia", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Fuchsia elegance"}, {"type": "image", "src": "media/dsc3885.jpg", "poster": "", "title": "Collection — portrait de groupe", "cat": "Mode", "meta": "Photo", "layout": "wide", "title_en": "Collection — group portrait"}, {"type": "image", "src": "media/dsc3956.jpg", "poster": "", "title": "Portrait en studio", "cat": "Mode", "meta": "Photo", "layout": "", "title_en": "Studio portrait"}, {"type": "image", "src": "media/dsc3894.jpg", "poster": "", "title": "Défilé — tenue fuchsia", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Runway — fuchsia outfit"}, {"type": "image", "src": "media/dsc3910.jpg", "poster": "", "title": "Défilé — collection pastel", "cat": "Mode", "meta": "Photo", "layout": "wide", "title_en": "Runway — pastel collection"}, {"type": "image", "src": "media/dsc3913.jpg", "poster": "", "title": "Défilé — tenue ivoire", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Runway — ivory outfit"}, {"type": "image", "src": "media/dsc4534.jpg", "poster": "", "title": "Réception — le buffet", "cat": "Événement", "meta": "Photo", "layout": "wide", "title_en": "Reception — the buffet"}, {"type": "image", "src": "media/dsc4529.jpg", "poster": "", "title": "Réception — service", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — service"}, {"type": "image", "src": "media/dsc4528.jpg", "poster": "", "title": "Réception — détails", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — details"}, {"type": "image", "src": "media/dsc4530.jpg", "poster": "", "title": "Réception — les invitées", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — the guests"}, {"type": "image", "src": "media/dsc4535.jpg", "poster": "", "title": "Réception — ambiance", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — atmosphere"}, {"type": "video", "src": "media/pamoja.mp4", "poster": "media/pamoja.jpg", "title": "Pamoja — Construire sa carrière", "cat": "Vidéo", "meta": "16:9 · 01:00", "layout": "wide", "title_en": "Pamoja — Build your career"}], "contact": {"email": "", "phone": "", "instagram": "https://www.instagram.com/jomvisuel.4k", "city": "Ottawa–Gatineau"}, "en": {"tagline": "Stories. Sound. Vision. Impact.", "heroTitle": "Let's tell your *story.*", "heroSub": "A video and photo studio. Filming, editing, color grading and motion design delivered in 4K, for brands, events and creators.", "about": "JØM Studios is a visual creation studio. We turn your ideas into images that last: ads, event videos, social media content and animated brand identities.\n\nEvery project is filmed, edited and color graded with the same care, from the first shot to the final 4K render.", "marquee": ["4K Video", "Photo", "Editing", "Color grading", "Motion design", "Sound design"], "services": [{"t": "Video production", "d": "4K filming for ads, events, portraits and brand content."}, {"t": "Photography", "d": "Portraits, products and reportage, retouched and ready to publish."}, {"t": "Editing", "d": "Pacing, storytelling and subtitles for every format: Reels, YouTube, TV."}, {"t": "Color grading", "d": "A consistent, cinematic look across all your footage."}, {"t": "Motion design", "d": "Animated logos, titles, intros and custom animated ads."}, {"t": "Sound design", "d": "Music, sound effects and voice-over mixed for sound that carries."}], "process": [{"t": "Brief", "d": "We talk about your project, your audience and your goals."}, {"t": "Shoot", "d": "We capture images and sound, in studio or on location."}, {"t": "Edit", "d": "Editing, color grading, motion design and audio mixing."}, {"t": "Delivery", "d": "Final 4K files, adapted for every platform."}], "cats": {"Mode": "Fashion", "Événement": "Event", "Vidéo": "Video", "Motion design": "Motion design", "Photo": "Photo", "Design": "Design"}}}</script>
+<script id="site-state" type="application/json">{"name": "JØM Studios", "tagline": "Stories. Sound. Vision. Impact.", "heroTitle": "Racontons votre *histoire.*", "heroSub": "Studio de création vidéo et photo. Tournage, montage, étalonnage et motion design livrés en 4K, pour les marques, les événements et les créateurs.", "accent": "#D4AF62", "mode": "dark", "font": "cinema", "heroVideo": "media/showreel_hero.mp4", "heroPoster": "media/showreel_poster.jpg", "aboutImg": "media/logo_jom_noir.jpg", "about": "JØM Studios est un studio de création visuelle. On transforme vos idées en images qui restent : publicités, vidéos d'événements, contenus pour les réseaux et identités animées.\n\nChaque projet est tourné, monté et étalonné avec le même soin, du premier plan jusqu'au rendu final en 4K.", "marquee": ["Vidéo 4K", "Photo", "Montage", "Étalonnage", "Motion design", "Sound design"], "services": [{"icon": "cam", "t": "Tournage vidéo", "d": "Captation en 4K pour pubs, événements, portraits et contenus de marque."}, {"icon": "photo", "t": "Photographie", "d": "Portraits, produits et reportages, retouchés et livrés prêts à publier."}, {"icon": "cut", "t": "Montage", "d": "Rythme, narration et sous-titres pour chaque format : Reels, YouTube, TV."}, {"icon": "grade", "t": "Étalonnage", "d": "Un look cohérent et cinématographique sur toutes vos images."}, {"icon": "spark", "t": "Motion design", "d": "Logos animés, titres, intros et pubs animées sur mesure."}, {"icon": "wave", "t": "Sound design", "d": "Musique, bruitages et voix off mixés pour un son qui porte."}], "process": [{"t": "Brief", "d": "On échange sur votre projet, votre public et vos objectifs."}, {"t": "Tournage", "d": "On capte les images et le son, en studio ou sur place."}, {"t": "Montage", "d": "Montage, étalonnage, motion design et mixage audio."}, {"t": "Livraison", "d": "Fichiers finaux en 4K, déclinés pour chaque plateforme."}], "portfolio": [{"type": "video", "src": "media/promo_doree_16x9.mp4", "poster": "media/promo_doree_16x9.jpg", "title": "JØM — Promo lumière dorée", "cat": "Motion design", "meta": "16:9 · 00:25", "layout": "wide", "title_en": "JØM — Golden light promo"}, {"type": "image", "src": "media/pam_6930.jpg", "poster": "", "title": "Pamoja — Échange sur scène", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "wide", "title_en": "Pamoja — On-stage conversation"}, {"type": "image", "src": "media/pam_6915b.jpg", "poster": "", "title": "Pamoja — Prise de parole", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "tall", "title_en": "Pamoja — Speaking up"}, {"type": "image", "src": "media/pam_6933.jpg", "poster": "", "title": "Pamoja — Panel carrière", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "", "title_en": "Pamoja — Career panel"}, {"type": "image", "src": "media/pam_6964.jpg", "poster": "", "title": "Pamoja — L’intervenant", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "tall", "title_en": "Pamoja — The speaker"}, {"type": "image", "src": "media/pam_6975b.jpg", "poster": "", "title": "Pamoja — La salle", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "wide", "title_en": "Pamoja — The room"}, {"type": "image", "src": "media/pam_7003.jpg", "poster": "", "title": "Pamoja — Inspirer la relève", "cat": "Association", "meta": "Photo · Pamoja Youth Development", "layout": "tall", "title_en": "Pamoja — Inspiring the next generation"}, {"type": "image", "src": "media/aay_7926.jpg", "poster": "", "title": "AAYCE — La promotion", "cat": "Association", "meta": "Photo · AAYCE", "layout": "wide", "title_en": "AAYCE — The cohort"}, {"type": "image", "src": "media/aay_7852.jpg", "poster": "", "title": "AAYCE — Remise de certificat", "cat": "Association", "meta": "Photo · AAYCE", "layout": "tall", "title_en": "AAYCE — Certificate ceremony"}, {"type": "image", "src": "media/aay_7656.jpg", "poster": "", "title": "AAYCE — Sur scène", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — On stage"}, {"type": "image", "src": "media/aay_7686.jpg", "poster": "", "title": "AAYCE — Culture et tradition", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — Culture and tradition"}, {"type": "image", "src": "media/aay_7917.jpg", "poster": "", "title": "AAYCE — Certificats en main", "cat": "Association", "meta": "Photo · AAYCE", "layout": "wide", "title_en": "AAYCE — Certificates in hand"}, {"type": "image", "src": "media/aay_7892.jpg", "poster": "", "title": "AAYCE — Les lauréats", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — The award winners"}, {"type": "image", "src": "media/aay_7899.jpg", "poster": "", "title": "AAYCE — Trophée", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — Trophy"}, {"type": "image", "src": "media/aay_7549.jpg", "poster": "", "title": "AAYCE — Les mentores", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — The mentors"}, {"type": "image", "src": "media/aay_7935.jpg", "poster": "", "title": "AAYCE — Joie partagée", "cat": "Association", "meta": "Photo · AAYCE", "layout": "wide", "title_en": "AAYCE — Shared joy"}, {"type": "image", "src": "media/aay_7925.jpg", "poster": "", "title": "AAYCE — Photo de groupe", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — Group photo"}, {"type": "image", "src": "media/aay_7939.jpg", "poster": "", "title": "AAYCE — Repoussez vos limites", "cat": "Association", "meta": "Photo · AAYCE", "layout": "", "title_en": "AAYCE — Push your limits"}, {"type": "image", "src": "media/dsc3893.jpg", "poster": "", "title": "Élégance en fuchsia", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Fuchsia elegance"}, {"type": "image", "src": "media/dsc3885.jpg", "poster": "", "title": "Collection — portrait de groupe", "cat": "Mode", "meta": "Photo", "layout": "wide", "title_en": "Collection — group portrait"}, {"type": "image", "src": "media/dsc3956.jpg", "poster": "", "title": "Portrait en studio", "cat": "Mode", "meta": "Photo", "layout": "", "title_en": "Studio portrait"}, {"type": "image", "src": "media/dsc3894.jpg", "poster": "", "title": "Défilé — tenue fuchsia", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Runway — fuchsia outfit"}, {"type": "image", "src": "media/dsc3910.jpg", "poster": "", "title": "Défilé — collection pastel", "cat": "Mode", "meta": "Photo", "layout": "wide", "title_en": "Runway — pastel collection"}, {"type": "image", "src": "media/dsc3913.jpg", "poster": "", "title": "Défilé — tenue ivoire", "cat": "Mode", "meta": "Photo", "layout": "tall", "title_en": "Runway — ivory outfit"}, {"type": "image", "src": "media/dsc4534.jpg", "poster": "", "title": "Réception — le buffet", "cat": "Événement", "meta": "Photo", "layout": "wide", "title_en": "Reception — the buffet"}, {"type": "image", "src": "media/dsc4529.jpg", "poster": "", "title": "Réception — service", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — service"}, {"type": "image", "src": "media/dsc4528.jpg", "poster": "", "title": "Réception — détails", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — details"}, {"type": "image", "src": "media/dsc4530.jpg", "poster": "", "title": "Réception — les invitées", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — the guests"}, {"type": "image", "src": "media/dsc4535.jpg", "poster": "", "title": "Réception — ambiance", "cat": "Événement", "meta": "Photo", "layout": "", "title_en": "Reception — atmosphere"}, {"type": "video", "src": "media/pamoja.mp4", "poster": "media/pamoja.jpg", "title": "Pamoja — Construire sa carrière", "cat": "Vidéo", "meta": "16:9 · 01:00", "layout": "wide", "title_en": "Pamoja — Build your career"}], "contact": {"email": "", "phone": "", "instagram": "https://www.instagram.com/jomvisuel.4k", "city": "Ottawa–Gatineau"}, "en": {"tagline": "Stories. Sound. Vision. Impact.", "heroTitle": "Let's tell your *story.*", "heroSub": "A video and photo studio. Filming, editing, color grading and motion design delivered in 4K, for brands, events and creators.", "about": "JØM Studios is a visual creation studio. We turn your ideas into images that last: ads, event videos, social media content and animated brand identities.\n\nEvery project is filmed, edited and color graded with the same care, from the first shot to the final 4K render.", "marquee": ["4K Video", "Photo", "Editing", "Color grading", "Motion design", "Sound design"], "services": [{"t": "Video production", "d": "4K filming for ads, events, portraits and brand content."}, {"t": "Photography", "d": "Portraits, products and reportage, retouched and ready to publish."}, {"t": "Editing", "d": "Pacing, storytelling and subtitles for every format: Reels, YouTube, TV."}, {"t": "Color grading", "d": "A consistent, cinematic look across all your footage."}, {"t": "Motion design", "d": "Animated logos, titles, intros and custom animated ads."}, {"t": "Sound design", "d": "Music, sound effects and voice-over mixed for sound that carries."}], "process": [{"t": "Brief", "d": "We talk about your project, your audience and your goals."}, {"t": "Shoot", "d": "We capture images and sound, in studio or on location."}, {"t": "Edit", "d": "Editing, color grading, motion design and audio mixing."}, {"t": "Delivery", "d": "Final 4K files, adapted for every platform."}], "cats": {"Mode": "Fashion", "Événement": "Event", "Vidéo": "Video", "Motion design": "Motion design", "Photo": "Photo", "Design": "Design", "Association": "Nonprofit"}}}</script>
 <script id="site-app">
 (function(){
 const S=JSON.parse(document.getElementById('site-state').textContent);
@@ -200,12 +238,12 @@ const UI={fr:{nav:['Services','Portfolio','Processus','À propos'],quote:'Demand
  svcH:"Ce que l'on *crée*",svcP:"De l'idée au fichier final : on gère chaque étape pour que votre image soit à la hauteur de votre projet.",
  pfH:'Nos *réalisations*',all:'Tout',filterLbl:'Filtrer le portfolio',soon:'Le portfolio arrive bientôt.',open:'Ouvrir',
  prH:'Comment on *travaille*',about:'À propos',studio:n=>'Le studio *'+n+'*',contact:'Contact',
- email:'Courriel',phone:'Téléphone',city:'Ville',copy:'Copier',copied:'Copié',selected:'Sélectionné',nodetails:'Coordonnées à venir.',close:'Fermer',navLbl:'Navigation principale',langLbl:'Langue'},
+ email:'Courriel',phone:'Téléphone',city:'Ville',copy:'Copier',copied:'Copié',selected:'Sélectionné',nodetails:'Coordonnées à venir.',close:'Fermer',navLbl:'Navigation principale',langLbl:'Langue',g3E:'Galerie 3D',g3H:"Entrez dans *l'image*",g3P:"Faites défiler pour avancer entre nos photos. Cliquez sur une image pour l'ouvrir.",reel:'Showreel',reelS:'Nos images en mouvement',scroll:'Défiler'},
  en:{nav:['Services','Portfolio','Process','About'],quote:'Request a quote',seeWork:'See our work',contactUs:'Contact us',
  svcH:'What we *create*',svcP:'From idea to final file, we handle every step so your visuals match the ambition of your project.',
  pfH:'Our *work*',all:'All',filterLbl:'Filter the portfolio',soon:'Portfolio coming soon.',open:'Open',
  prH:'How we *work*',about:'About',studio:n=>'The *'+n+'* studio',contact:'Contact',
- email:'Email',phone:'Phone',city:'City',copy:'Copy',copied:'Copied',selected:'Selected',nodetails:'Contact details coming soon.',close:'Close',navLbl:'Main navigation',langLbl:'Language'}};
+ email:'Email',phone:'Phone',city:'City',copy:'Copy',copied:'Copied',selected:'Selected',nodetails:'Contact details coming soon.',close:'Close',navLbl:'Main navigation',langLbl:'Language',g3E:'3D gallery',g3H:'Step into *the frame*',g3P:'Scroll to move through our photos. Click an image to open it.',reel:'Showreel',reelS:'Our images in motion',scroll:'Scroll'}};
 let LANG=(()=>{try{const v=localStorage.getItem('jom-lang');if(v==='fr'||v==='en')return v;}catch(e){}return /^fr/i.test(navigator.language||'fr')?'fr':'en';})();
 const U=k=>UI[LANG][k];
 const E=()=>S.en||{};
@@ -233,17 +271,23 @@ function render(){
   <ul><li><a href="#services">${nav[0]}</a></li><li><a href="#portfolio">${nav[1]}</a></li><li><a href="#processus">${nav[2]}</a></li><li><a href="#apropos">${nav[3]}</a></li></ul>
   <div class="navr"><div class="lang" role="group" aria-label="${U('langLbl')}"><button data-lang="fr" aria-pressed="${LANG==='fr'}">FR</button><button data-lang="en" aria-pressed="${LANG==='en'}">EN</button></div>
   <a class="btn primary" href="#contact">${U('quote')}</a></div></div></nav>
- <header class="hero" id="top">
+ <div class="h3d" id="top"><header class="hero h3d-stick">
   <div class="media">${S.heroVideo?`<video src="${esc(S.heroVideo)}" ${S.heroPoster?`poster="${esc(S.heroPoster)}"`:''} autoplay muted loop playsinline></video>`:(S.heroPoster?`<img src="${esc(S.heroPoster)}" alt="">`:'')}</div>
+  <div class="h3d-c" id="h3dc"></div>
   <div class="hud" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><div class="rec"><b></b>REC</div><div class="fmt">4K · 60 FPS</div><div class="tc" id="tc">00:00:00:00</div></div>
   <div class="content wrap"><span class="eyebrow">${esc(tx('tagline'))}</span><h1>${emph(tx('heroTitle'))}</h1><p class="sub">${esc(tx('heroSub'))}</p>
    <div class="ctas"><a class="btn primary" href="#portfolio">${U('seeWork')}</a><a class="btn" href="#contact">${U('contactUs')}</a></div></div>
- </header>
+  <div class="h3d-cap2" aria-hidden="true"><span>${U('reel')}</span><b>${esc(U('reelS'))}</b></div>
+  <div class="h3d-hint" aria-hidden="true">${U('scroll')}<i></i></div><div class="h3d-fade"></div>
+ </header></div>
  <div class="band" aria-hidden="true"><div class="track">${mq}${mq}${mq}${mq}</div></div>
  <section id="services"><div class="wrap">
   <div class="sec-head"><h2 class="sec">${emph(U('svcH'))}</h2><p>${esc(U('svcP'))}</p></div>
   <div class="svc">${S.services.map((s,i)=>`<article><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.icon]||ICONS.spark}</svg><h3>${esc(svcT(i,'t'))}</h3><p>${esc(svcT(i,'d'))}</p></article>`).join('')}</div>
  </div></section>
+ <section class="g3d" id="galerie" style="height:${Math.max(320,S.portfolio.length*38+120)}vh" aria-label="${esc(U('g3E'))}"><div class="g3d-stick"><div class="g3d-c" id="g3dc"></div>
+  <div class="g3d-ui"><div class="wrap"><span class="eyebrow">${U('g3E')}</span><h2 class="sec">${emph(U('g3H'))}</h2><p class="hintp">${esc(U('g3P'))}</p></div>
+  <div class="wrap"><div class="g3d-foot"><div class="g3d-cap"><b id="g3t"></b><span id="g3m"></span></div><span class="g3d-n" id="g3n"></span></div><div class="g3d-bar"><i id="g3p"></i></div></div></div></div></section>
  <section id="portfolio" style="padding-top:0"><div class="wrap">
   <div class="sec-head"><h2 class="sec">${emph(U('pfH'))}</h2>
    ${cs.length>1?`<div class="filters" role="group" aria-label="${U('filterLbl')}">${['*',...cs].map(c=>`<button class="chip" data-f="${esc(c)}" aria-pressed="${c===filter}">${esc(c==='*'?U('all'):catL(c))}</button>`).join('')}</div>`:''}</div>
@@ -264,7 +308,7 @@ function render(){
  </div></section>
  <footer><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(S.name)}</span><span>${esc(tx('tagline'))}</span></div></footer>
  <dialog class="lb" id="lb"><div class="box"><button class="close" aria-label="${U('close')}">×</button><div id="lbm"></div></div><p id="lbt"></p></dialog>`;
- bind();
+ bind();mount3D();
 }
 function bind(){
  app.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{if(LANG===b.dataset.lang)return;LANG=b.dataset.lang;try{localStorage.setItem('jom-lang',LANG);}catch(e){}const y=scrollY;render();scrollTo(0,y);});
@@ -281,6 +325,226 @@ function openLb(i){const p=S.portfolio[i];if(!p)return;const lb=document.getElem
 // timecode
 let t0=performance.now();(function tick(){const el=document.getElementById('tc');if(el){const f=Math.floor((performance.now()-t0)/1000*60);const s=Math.floor(f/60),m=Math.floor(s/60);el.textContent=`00:${String(m%60).padStart(2,'0')}:${String(s%60).padStart(2,'0')}:${String(f%60).padStart(2,'0')}`;}
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(tick);})();
+/* ================= 3D (Three.js) ================= */
+const R3={ok:null,loading:null,hero:null,gal:null,mouse:{x:0,y:0}};
+const RM3=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ease=x=>{x=clamp(x);return x*x*(3-2*x);};
+const lerp=(a,b,t)=>a+(b-a)*t;
+function webglOK(){try{const c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));}catch(e){return false;}}
+function loadThree(){return new Promise((res,rej)=>{if(window.THREE)return res();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=()=>window.THREE?res():rej();s.onerror=rej;document.head.appendChild(s);});}
+addEventListener('pointermove',e=>{R3.mouse.x=e.clientX/innerWidth*2-1;R3.mouse.y=e.clientY/innerHeight*2-1;},{passive:true});
+function mount3D(){
+ if(R3.ok===false){document.documentElement.classList.add('no3d');return;}
+ if(!R3.ok){
+  if(!R3.loading){
+   if(!webglOK()){R3.ok=false;document.documentElement.classList.add('no3d');return;}
+   R3.loading=loadThree().then(()=>{R3.ok=true;try{R3.hero=makeHero();R3.gal=makeGallery();document.documentElement.classList.add('is3d');mount3D();requestAnimationFrame(loop3D);}catch(err){console.error(err);R3.ok=false;document.documentElement.classList.remove('is3d');document.documentElement.classList.add('no3d');}}).catch(()=>{R3.ok=false;document.documentElement.classList.add('no3d');});
+  }
+  return;
+ }
+ const hc=document.getElementById('h3dc');if(hc&&R3.hero&&R3.hero.canvas.parentNode!==hc)hc.appendChild(R3.hero.canvas);
+ const gc=document.getElementById('g3dc');if(gc&&R3.gal){if(R3.gal.canvas.parentNode!==gc)gc.appendChild(R3.gal.canvas);R3.gal.setItems(S.portfolio);}
+ R3.hero&&R3.hero.resize();R3.gal&&R3.gal.resize();
+}
+let last3=performance.now();
+function loop3D(now){const dt=Math.min(.05,(now-last3)/1000);last3=now;const t=now/1000;
+ try{if(R3.hero)R3.hero.frame(t,dt);if(R3.gal)R3.gal.frame(t,dt);}catch(e){console.error(e);}
+ requestAnimationFrame(loop3D);}
+addEventListener('resize',()=>{R3.hero&&R3.hero.resize();R3.gal&&R3.gal.resize();});
+function accentColor(){return new THREE.Color(S.accent||'#D4AF62');}
+function cTex(w,h,draw,o={}){const T=THREE;const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');draw(g,w,h);const t=new T.CanvasTexture(c);t.wrapS=t.wrapT=T.RepeatWrapping;if(o.rep)t.repeat.set(o.rep[0],o.rep[1]);if(o.srgb)t.encoding=T.sRGBEncoding;t.anisotropy=4;return t;}
+function progOf(el){if(!el)return 0;const r=el.getBoundingClientRect();const span=r.height-innerHeight;return span>0?clamp(-r.top/span):0;}
+function onScreen(el){if(!el)return false;const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight;}
+
+function makeHero(){
+ const T=THREE;
+ const canvas=document.createElement('canvas');canvas.className='c3d';canvas.setAttribute('aria-hidden','true');
+ const ren=new T.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+ ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.outputEncoding=T.sRGBEncoding;ren.toneMapping=T.ACESFilmicToneMapping;ren.toneMappingExposure=1.15;ren.setClearColor(0x000000,0);
+ const scene=new T.Scene();
+ const cam=new T.PerspectiveCamera(30,1,0.05,100);cam.position.set(0,0,10);
+ // studio environment for reflections
+ const pm=new T.PMREMGenerator(ren);const es=new T.Scene();
+ es.add(new T.Mesh(new T.BoxGeometry(30,30,30),new T.MeshBasicMaterial({color:0x060607,side:T.BackSide})));
+ const panel=(w,h,c,i,x,y,z)=>{const m=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:new T.Color(c).multiplyScalar(i),side:T.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m);};
+ panel(8,3,0xffffff,2.6,0,8,3);panel(3,8,0xffe0b0,2.0,-9,1,4);panel(3,7,0xb8ccff,1.4,9,0,-3);panel(10,1.2,0xffffff,2.2,0,-3,9);panel(2,2,0xffffff,3,4,4,8);
+ scene.environment=pm.fromScene(es,0.035).texture;
+ const ACC=accentColor();
+ scene.add(new T.AmbientLight(0xffffff,0.12));
+ const key=new T.SpotLight(0xfff0dc,2.6,40,0.55,0.7);key.position.set(-5,6,8);scene.add(key);
+ const rim=new T.PointLight(ACC,3.0,25);rim.position.set(5,2.5,-5);scene.add(rim);
+ const rim2=new T.PointLight(0x7090ff,1.4,25);rim2.position.set(-6,-1,-4);scene.add(rim2);
+ // textures
+ const leather=cTex(512,512,(g,w,h)=>{g.fillStyle='#808080';g.fillRect(0,0,w,h);for(let i=0;i<9000;i++){const v=100+Math.random()*60|0;g.fillStyle=`rgb(${v},${v},${v})`;const r=1+Math.random()*3;g.beginPath();g.arc(Math.random()*w,Math.random()*h,r,0,7);g.fill();}},{rep:[3,3]});
+ const ribs=cTex(256,8,(g,w,h)=>{for(let x=0;x<w;x++){const v=Math.sin(x/w*Math.PI*2*48)>0?200:60;g.fillStyle=`rgb(${v},${v},${v})`;g.fillRect(x,0,1,h);}});
+ const fine=cTex(256,8,(g,w,h)=>{for(let x=0;x<w;x++){const v=Math.sin(x/w*Math.PI*2*96)>0?200:70;g.fillStyle=`rgb(${v},${v},${v})`;g.fillRect(x,0,1,h);}});
+ const marks=cTex(2048,96,(g,w,h)=>{g.fillStyle='#16171a';g.fillRect(0,0,w,h);g.fillStyle='#f2f2f2';g.font='600 46px Manrope, sans-serif';g.textAlign='center';g.textBaseline='middle';['24','28','35','50','70','24','28','35','50','70'].forEach((s,i)=>g.fillText(s,(i+.5)*w/10,h/2));},{srgb:true});
+ const ringTxt=cTex(1024,1024,(g,w,h)=>{g.fillStyle='#141518';g.fillRect(0,0,w,h);g.translate(w/2,h/2);g.fillStyle='#e9e9ec';g.font='600 40px Manrope, sans-serif';g.textAlign='center';g.textBaseline='middle';const s='JØM VISION  ·  24-70mm  1:2.8  ·  Ø82  ·  4K CINEMA  ·  ';const R=w*0.44;const step=Math.PI*2/s.length;for(let i=0;i<s.length;i++){g.save();g.rotate(-Math.PI/2+i*step);g.translate(R,0);g.rotate(Math.PI/2);g.fillText(s[i],0,0);g.restore();}},{srgb:true});
+ const logoTex=cTex(512,160,(g,w,h)=>{g.clearRect(0,0,w,h);g.font='600 120px "Bodoni Moda", Georgia, serif';g.textAlign='center';g.textBaseline='middle';const a='#'+ACC.getHexString();g.fillStyle='#f4f4f6';g.fillText('J',w/2-120,h/2+6);g.fillStyle=a;g.fillText('Ø',w/2,h/2+6);g.fillStyle='#f4f4f6';g.fillText('M',w/2+130,h/2+6);},{srgb:true});
+ logoTex.wrapS=logoTex.wrapT=T.ClampToEdgeWrapping;
+ // materials
+ const M={
+  leather:new T.MeshStandardMaterial({color:0x121214,roughness:.78,metalness:0,bumpMap:leather,bumpScale:.012}),
+  dark:new T.MeshStandardMaterial({color:0x1e1f23,roughness:.3,metalness:.85}),
+  silver:new T.MeshStandardMaterial({color:0xbfc2c8,roughness:.22,metalness:1}),
+  acc:new T.MeshStandardMaterial({color:ACC,roughness:.28,metalness:1}),
+  rubber:new T.MeshStandardMaterial({color:0x0d0d0e,roughness:.85,metalness:0,bumpMap:ribs,bumpScale:.03}),
+  rubber2:new T.MeshStandardMaterial({color:0x0f0f10,roughness:.8,metalness:0,bumpMap:fine,bumpScale:.025}),
+  marks:new T.MeshStandardMaterial({color:0xffffff,map:marks,roughness:.4,metalness:.5}),
+  ring:new T.MeshStandardMaterial({color:0xffffff,map:ringTxt,roughness:.45,metalness:.5}),
+  glass:new T.MeshPhysicalMaterial({color:0x070910,metalness:.1,roughness:.03,clearcoat:1,clearcoatRoughness:.02,envMapIntensity:3,transparent:true,opacity:.7}),
+  coat:new T.MeshPhysicalMaterial({color:0x2a1650,metalness:1,roughness:.12,clearcoat:1,envMapIntensity:2.2,emissive:0x140a2a}),
+  black:new T.MeshStandardMaterial({color:0x050506,roughness:.5,metalness:.2}),
+  gloss:new T.MeshStandardMaterial({color:0x0b0b0c,roughness:.12,metalness:.4})
+ };
+ const rr=(w,h,r)=>{const s=new T.Shape();const x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s;};
+ const ext=(shape,d,bev)=>{const g=new T.ExtrudeGeometry(shape,{depth:d,bevelEnabled:true,bevelThickness:bev,bevelSize:bev,bevelSegments:5,curveSegments:18});g.translate(0,0,-d/2);g.computeVertexNormals();return g;};
+ const add=(geo,mat,x,y,z,parent)=>{const m=new T.Mesh(geo,mat);m.position.set(x,y,z);(parent||body).add(m);return m;};
+ const cyl=(r,len,mat,z,seg=96,x=LX,y=LY)=>{const g=new T.CylinderGeometry(r,r,len,seg,1);g.rotateX(Math.PI/2);return add(g,mat,x,y,z);};
+ const rig=new T.Group();scene.add(rig);
+ const body=new T.Group();rig.add(body);
+ // body
+ add(ext(rr(2.6,1.2,.14),.62,.08),M.leather,0,-.18,0);
+ add(ext(rr(2.62,.36,.1),.66,.07),M.dark,0,.55,0);
+ const hump=new T.Shape();hump.moveTo(-.46,0);hump.lineTo(.46,0);hump.lineTo(.3,.36);hump.lineTo(-.3,.36);hump.closePath();
+ add(ext(hump,.6,.05),M.dark,.15,.66,0);
+ add(ext(rr(.64,1.28,.28),.34,.1),M.leather,-.94,-.13,.43);
+ // controls
+ add(new T.CylinderGeometry(.15,.15,.05,48),M.dark,-.94,.775,.18);
+ add(new T.CylinderGeometry(.1,.1,.07,48),M.acc,-.94,.815,.18);
+ const dial=add(new T.CylinderGeometry(.25,.25,.14,64),M.rubber2,.88,.82,-.02);
+ add(new T.CylinderGeometry(.2,.2,.1,48),M.rubber2,-.5,.8,-.08);
+ add(new T.BoxGeometry(.46,.05,.38),M.silver,.15,1.07,0);
+ [[-1.36,.45],[1.36,.45]].forEach(([x,y])=>{const tr=add(new T.TorusGeometry(.07,.022,12,32),M.silver,x,y,0);tr.rotation.y=Math.PI/2;});
+ const logo=add(new T.PlaneGeometry(.6,.19),new T.MeshStandardMaterial({map:logoTex,transparent:true,roughness:.35,metalness:.3}),.15,.86,.358);
+ const af=add(new T.CircleGeometry(.035,24),new T.MeshStandardMaterial({color:0x220800,emissive:0xff5a1f,emissiveIntensity:0}),-.58,.36,.452);
+ // lens
+ const LX=.15,LY=-.13;let z=.44;
+ const stack=[[.64,.06,M.silver],[.6,.24,M.dark],[.63,.42,M.rubber],[.61,.12,M.marks],[.622,.03,M.acc],[.645,.3,M.rubber2],[.67,.22,M.dark]];
+ stack.forEach(([r,len,mat])=>{cyl(r,len,mat,z+len/2);z+=len;});
+ const zf=z;
+ const ring=add(new T.RingGeometry(.5,.67,128),M.ring,LX,LY,zf+.002);
+ const inner=cyl(.5,.12,M.black,zf-.06,96);inner.material=M.black;
+ const R1=1.15,cap=Math.asin(.5/R1);
+ const gl=new T.SphereGeometry(R1,64,16,0,Math.PI*2,0,cap);gl.rotateX(Math.PI/2);
+ const glass=add(gl,M.glass,LX,LY,zf-.03-R1);
+ const R2=.7,cap2=Math.asin(.36/R2);const cg=new T.SphereGeometry(R2,48,12,0,Math.PI*2,0,cap2);cg.rotateX(Math.PI/2);
+ add(cg,M.coat,LX,LY,zf-.13-R2);
+ add(new T.RingGeometry(.08,.38,64),M.black,LX,LY,zf-.16);
+ // back
+ add(ext(rr(1.74,1.12,.07),.04,.012),M.gloss,.0,-.2,-.44);
+ const vid=document.createElement('video');vid.muted=true;vid.loop=true;vid.playsInline=true;vid.setAttribute('playsinline','');vid.crossOrigin='anonymous';vid.preload='auto';
+ if(S.heroVideo)vid.src=S.heroVideo;
+ let scrMat;
+ if(S.heroVideo){const vt=new T.VideoTexture(vid);vt.encoding=T.sRGBEncoding;vt.minFilter=T.LinearFilter;scrMat=new T.MeshBasicMaterial({map:vt,toneMapped:false});}
+ else scrMat=new T.MeshBasicMaterial({color:0x111111});
+ const screen=add(new T.PlaneGeometry(1.6,.9),scrMat,0,-.2,-.47);screen.rotation.y=Math.PI;
+ add(ext(rr(.62,.44,.14),.26,.05),M.rubber2,.15,.84,-.5);
+ [[-.98,.2],[-.98,-.15],[-.98,-.5],[-1.1,.45]].forEach(([x,y],i)=>{const b=add(new T.CylinderGeometry(i==1?.17:.07,i==1?.17:.07,.05,40),i==1?M.rubber2:M.dark,x,y,-.47);b.rotation.x=Math.PI/2;});
+ // shadow + particles
+ const sh=new T.Mesh(new T.PlaneGeometry(5,1.6),new T.MeshBasicMaterial({map:cTex(256,128,(g,w,h)=>{const gr=g.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);gr.addColorStop(0,'rgba(0,0,0,.65)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);}),transparent:true,depthWrite:false}));
+ sh.rotation.x=-Math.PI/2;sh.position.y=-1.55;rig.add(sh);
+ const N=380,pos=new Float32Array(N*3);for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*14;pos[i*3+1]=(Math.random()-.5)*8;pos[i*3+2]=(Math.random()-.5)*8-1;}
+ const pg=new T.BufferGeometry();pg.setAttribute('position',new T.BufferAttribute(pos,3));
+ const dot=cTex(64,64,(g,w,h)=>{const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);});
+ const pts=new T.Points(pg,new T.PointsMaterial({size:.05,map:dot,color:ACC,transparent:true,opacity:.55,depthWrite:false,blending:T.AdditiveBlending}));scene.add(pts);
+ body.position.y=.05;
+ const st={rx:0,ry:-.6,x:0,y:0,cz:10,mx:0,my:0,flash:0};
+ const tmp=new T.Vector3(),look=new T.Vector3();
+ let playing=false;
+ function resize(){const host=canvas.parentNode;if(!host)return;const w=host.clientWidth||innerWidth,h=host.clientHeight||innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+ canvas.addEventListener('pointerdown',()=>{st.flash=1;});
+ function frame(t,dt){
+  const host=document.getElementById('top');if(!onScreen(host)||!canvas.parentNode){if(playing){vid.pause();playing=false;}return;}
+  const p=progOf(host);const wide=cam.aspect>1.05;
+  st.mx=lerp(st.mx,R3.mouse.x,.06);st.my=lerp(st.my,R3.mouse.y,.06);
+  const idle=RM3?0:1;
+  const turn=ease((p-.06)/.5);
+  const ry=lerp(-.62,Math.PI,turn)+st.mx*.35*(1-turn)+Math.sin(t*.45)*.09*idle*(1-turn);
+  const rx=lerp(.16,0,turn)+st.my*.18*(1-turn)+Math.sin(t*.6)*.03*idle*(1-turn);
+  st.ry=lerp(st.ry,ry,.12);st.rx=lerp(st.rx,rx,.12);
+  rig.rotation.set(st.rx,st.ry,0);
+  const s=wide?1:.78;rig.scale.setScalar(s);
+  const bx=wide?lerp(1.55,0,ease(p/.55)):0, by=wide?0:lerp(1.05,0,ease(p/.55));
+  rig.position.set(bx,by+Math.sin(t*.9)*.06*idle*(1-turn),0);
+  // dolly into the screen
+  const dive=ease((p-.58)/.4);
+  screen.getWorldPosition(tmp);
+  const sw=1.6*s,shh=.9*s,tn=Math.tan(cam.fov*Math.PI/360);
+  const dCover=Math.min(shh/(2*tn),sw/(2*tn*cam.aspect))*.92;
+  cam.position.set(lerp(0,tmp.x,dive),lerp(0,tmp.y,dive),lerp(10,tmp.z+dCover,dive));
+  look.set(lerp(0,tmp.x,dive),lerp(0,tmp.y,dive),tmp.z);cam.lookAt(look);
+  // video only when back is visible
+  const wantPlay=turn>.35;if(wantPlay&&!playing&&S.heroVideo){vid.play().catch(()=>{});playing=true;}else if(!wantPlay&&playing){vid.pause();playing=false;}
+  st.flash=Math.max(0,st.flash-dt*2.5);af.material.emissiveIntensity=2.5*st.flash+.25*(0.5+0.5*Math.sin(t*3))*(1-turn);
+  key.intensity=2.6+st.flash*6;
+  if(!RM3){pts.rotation.y=t*.02;pts.position.y=Math.sin(t*.2)*.1;}
+  sh.material.opacity=1-dive;
+  ren.render(scene,cam);
+  // overlays
+  const el=document.querySelector('.h3d-stick');if(el){el.style.setProperty('--p1',(1-ease((p-.02)/.16)).toFixed(3));el.style.setProperty('--p2',(ease((p-.32)/.12)*(1-ease((p-.62)/.1))).toFixed(3));el.style.setProperty('--p3',ease((p-.86)/.13).toFixed(3));}
+ }
+ return {canvas,frame,resize};
+}
+
+function makeGallery(){
+ const T=THREE;
+ const canvas=document.createElement('canvas');canvas.className='c3d';
+ const ren=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
+ ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.outputEncoding=T.sRGBEncoding;
+ const scene=new T.Scene();
+ const bgc=new T.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#0B0B0C');
+ scene.background=bgc;scene.fog=new T.Fog(bgc,7,24);
+ const cam=new T.PerspectiveCamera(46,1,.1,60);
+ const ACC=accentColor();
+ const grid=cTex(512,512,(g,w,h)=>{g.fillStyle='#000';g.fillRect(0,0,w,h);g.strokeStyle='rgba(255,255,255,.22)';g.lineWidth=2;for(let i=0;i<=8;i++){g.beginPath();g.moveTo(i*w/8,0);g.lineTo(i*w/8,h);g.stroke();g.beginPath();g.moveTo(0,i*h/8);g.lineTo(w,i*h/8);g.stroke();}},{rep:[12,60]});
+ const floor=new T.Mesh(new T.PlaneGeometry(48,240),new T.MeshBasicMaterial({map:grid,transparent:true,opacity:.35,blending:T.AdditiveBlending,depthWrite:false}));
+ floor.rotation.x=-Math.PI/2;floor.position.set(0,-2.4,-100);scene.add(floor);
+ const N=500,pos=new Float32Array(N*3);for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*16;pos[i*3+1]=(Math.random()-.5)*7;pos[i*3+2]=6-Math.random()*120;}
+ const pg=new T.BufferGeometry();pg.setAttribute('position',new T.BufferAttribute(pos,3));
+ const dot=cTex(64,64,(g)=>{const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);});
+ scene.add(new T.Points(pg,new T.PointsMaterial({size:.06,map:dot,color:ACC,transparent:true,opacity:.6,depthWrite:false,blending:T.AdditiveBlending})));
+ const group=new T.Group();scene.add(group);
+ const loader=new T.TextureLoader();
+ let items=[],sig='',endZ=0,hover=-1;const STEP=3.6;
+ const ray=new T.Raycaster(),ndc=new T.Vector2();
+ function layout(){const wide=cam.aspect>1.05;items.forEach((it,i)=>{const side=i%2?1:-1;const x=wide?side*1.95:side*.42;it.g.position.set(x,Math.sin(i*1.7)*.25,-i*STEP);it.g.rotation.y=wide?-side*.32:-side*.12;const maxW=wide?3.1:1.9,maxH=wide?2.1:2.3;let h=maxH,w=h*it.ar;if(w>maxW){w=maxW;h=w/it.ar;}it.g.scale.set(w,h,1);});endZ=-(items.length-1)*STEP;}
+ function setItems(list){const s=list.map(p=>p.type==='video'?p.poster||'':p.src).join('|');if(s===sig)return;sig=s;
+  items.forEach(it=>{group.remove(it.g);it.ph.material.map&&it.ph.material.map.dispose();it.ph.material.dispose();});items=[];
+  list.forEach((p,i)=>{const src=p.type==='video'?p.poster:p.src;if(!src)return;
+   const g=new T.Group();
+   const frame=new T.Mesh(new T.PlaneGeometry(1.06,1.06),new T.MeshBasicMaterial({color:0xf3f1ea}));frame.position.z=-.01;frame.scale.set(1,1,1);
+   const glow=new T.Mesh(new T.PlaneGeometry(1.2,1.2),new T.MeshBasicMaterial({color:ACC,transparent:true,opacity:0,depthWrite:false}));glow.position.z=-.02;
+   const ph=new T.Mesh(new T.PlaneGeometry(1,1),new T.MeshBasicMaterial({color:0x222222}));
+   g.add(glow,frame,ph);group.add(g);
+   const it={g,ph,frame,glow,ar:1.5,i:p.__i??i,idx:i,h:0};items.push(it);
+   loader.load(src,tex=>{tex.encoding=T.sRGBEncoding;tex.anisotropy=8;tex.minFilter=T.LinearMipmapLinearFilter;ph.material.map=tex;ph.material.color.set(0xffffff);ph.material.needsUpdate=true;it.ar=(tex.image.width/tex.image.height)||1.5;layout();});
+  });
+  layout();
+ }
+ function resize(){const host=canvas.parentNode;if(!host)return;const w=host.clientWidth||innerWidth,h=host.clientHeight||innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();layout();}
+ function pick(e){const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);const hit=ray.intersectObjects(items.map(it=>it.ph));return hit.length?items.find(it=>it.ph===hit[0].object):null;}
+ canvas.addEventListener('pointermove',e=>{const it=pick(e);hover=it?it.idx:-1;canvas.style.cursor=it?'pointer':'';});
+ canvas.addEventListener('pointerleave',()=>{hover=-1;});
+ canvas.addEventListener('click',e=>{const it=pick(e);if(it)openLb(it.idx);});
+ let cz=6,cx=0,lastCap=-2;
+ function frame(t,dt){
+  const host=document.getElementById('galerie');if(!onScreen(host)||!canvas.parentNode||!items.length)return;
+  const p=progOf(host);
+  const target=lerp(5.2,endZ+3.2,p);cz=lerp(cz,target,.1);
+  let near=0,best=1e9;items.forEach((it,k)=>{const d=Math.abs(it.g.position.z-(cz-4));if(d<best){best=d;near=k;}});
+  const nx=items[near]?items[near].g.position.x*.35:0;cx=lerp(cx,nx+R3.mouse.x*.25,.05);
+  cam.position.set(cx,.15-R3.mouse.y*.15,cz);cam.lookAt(cx*.6,0,cz-6);
+  items.forEach((it,k)=>{const on=k===hover?1:0;it.h=lerp(it.h,on,.15);it.glow.material.opacity=it.h*.55;const s=1+it.h*.04;it.ph.scale.setScalar(s);it.frame.scale.setScalar(s);if(!RM3)it.g.position.y=Math.sin(k*1.7+t*.6)*.18;});
+  ren.render(scene,cam);
+  if(near!==lastCap){lastCap=near;const p2=S.portfolio[items[near].idx];const tt=document.getElementById('g3t'),mm=document.getElementById('g3m');if(tt&&p2){tt.textContent=pT(p2);mm.textContent=[catL(p2.cat),p2.meta].filter(Boolean).join(' · ');const box=tt.parentElement;box.classList.remove('in');void box.offsetWidth;box.classList.add('in');}
+   const n=document.getElementById('g3n');if(n)n.textContent=String(near+1).padStart(2,'0')+' / '+String(items.length).padStart(2,'0');}
+  const bar=document.getElementById('g3p');if(bar)bar.style.transform=`scaleX(${p.toFixed(4)})`;
+ }
+ return {canvas,frame,resize,setItems:l=>{setItems(l);lastCap=-2;}};
+}
+
 render();
 
 })();
