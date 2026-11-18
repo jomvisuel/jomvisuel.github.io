@@ -385,8 +385,8 @@ function makeHero(){
  logoTex.wrapS=logoTex.wrapT=T.ClampToEdgeWrapping;
  // materials
  const M={
-  leather:new T.MeshStandardMaterial({color:0x121214,roughness:.78,metalness:0,bumpMap:leather,bumpScale:.012}),
-  dark:new T.MeshStandardMaterial({color:0x1e1f23,roughness:.3,metalness:.85}),
+  leather:new T.MeshStandardMaterial({color:0x0e0e10,roughness:.8,metalness:0,bumpMap:leather,bumpScale:.012,envMapIntensity:.35}),
+  dark:new T.MeshStandardMaterial({color:0x141518,roughness:.32,metalness:.85,envMapIntensity:.8}),
   silver:new T.MeshStandardMaterial({color:0xbfc2c8,roughness:.22,metalness:1}),
   acc:new T.MeshStandardMaterial({color:ACC,roughness:.28,metalness:1}),
   rubber:new T.MeshStandardMaterial({color:0x0d0d0e,roughness:.85,metalness:0,bumpMap:ribs,bumpScale:.03}),
@@ -439,7 +439,7 @@ function makeHero(){
  let scrMat;
  if(S.heroVideo){const vt=new T.VideoTexture(vid);vt.encoding=T.sRGBEncoding;vt.minFilter=T.LinearFilter;scrMat=new T.MeshBasicMaterial({map:vt,toneMapped:false});}
  else scrMat=new T.MeshBasicMaterial({color:0x111111});
- const screen=add(new T.PlaneGeometry(1.6,.9),scrMat,0,-.2,-.47);screen.rotation.y=Math.PI;
+ const screen=add(new T.PlaneGeometry(1.6,.9),scrMat,0,-.2,-.486);screen.rotation.y=Math.PI;
  add(ext(rr(.62,.44,.14),.26,.05),M.rubber2,.15,.84,-.5);
  [[-.98,.2],[-.98,-.15],[-.98,-.5],[-1.1,.45]].forEach(([x,y],i)=>{const b=add(new T.CylinderGeometry(i==1?.17:.07,i==1?.17:.07,.05,40),i==1?M.rubber2:M.dark,x,y,-.47);b.rotation.x=Math.PI/2;});
  // shadow + particles
